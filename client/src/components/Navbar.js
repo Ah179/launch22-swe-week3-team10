@@ -8,8 +8,12 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const theme = createTheme({
 	palette: {
 		navbar: {
-			main: teal[100]
+			main: teal[100],
 		},
+		navbutton: {
+			main: "#00241B",
+			contrastText: "#fff"
+		}
 	}
 })
 
@@ -19,7 +23,7 @@ const Navbar = props => {
 		 	<ThemeProvider theme={theme}>
 				<AppBar position="static" color="navbar">
 					<Toolbar>
-						<Grid container spacing="2" justifyContent="center">
+						<Grid container spacing="2" justifyContent="center" alignItems="center">
 							<Grid item xs="auto">
 								<Typography variant="h4" align="left">Bookly</Typography>
 							</Grid>
@@ -31,6 +35,8 @@ const Navbar = props => {
 										to='/'
 										sx={{ mx: 1 }}
 										startIcon={<BookIcon />}
+										color="navbutton"
+										size="large"
 									>
 										Books	
 									</Button>
@@ -40,6 +46,8 @@ const Navbar = props => {
 										to='/cart'
 										sx={{ mx: 1 }}
 										startIcon={<ShoppingCartIcon />}
+										color="navbutton"
+										size="large"
 									>
 										Cart
 									</Button>
