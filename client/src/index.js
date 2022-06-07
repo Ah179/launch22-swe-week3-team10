@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Error from './components/Error.js';
+import ProductsPage from './components/ProductPage/ProductsPage'
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
@@ -17,7 +18,7 @@ root.render(
     <Routes>
       <Route path="/" element={<App />}>
         <Route path="" element={null} />
-        <Route path="book/:isbn" element={null} />
+        <Route path="book/:isbn" element={<ProductsPage/>} />
         <Route path="cart" element={null} />
         <Route path="*" element={<Error />} />
       </Route>
