@@ -32,7 +32,7 @@ const Navbar = props => {
 									<Button
 										variant={useLocation().pathname === '/' ? 'contained' : 'text'}
 										component={Link}
-										to='/'
+										to='/book/:isbn'
 										sx={{ mx: 1 }}
 										startIcon={<BookIcon />}
 										color="navbutton"
