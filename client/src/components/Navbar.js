@@ -2,6 +2,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { Button, Typography, AppBar, Grid, Toolbar } from '@mui/material';
 import { teal } from '@mui/material/colors';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import BookIcon from '@mui/icons-material/Book';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const theme = createTheme({
 	palette: {
@@ -28,7 +30,7 @@ const Navbar = props => {
 										component={Link}
 										to='/'
 										sx={{ mx: 1 }}
-										startIcon={null}
+										startIcon={<BookIcon />}
 									>
 										Books	
 									</Button>
@@ -37,7 +39,7 @@ const Navbar = props => {
 										component={Link}
 										to='/cart'
 										sx={{ mx: 1 }}
-										startIcon={null}
+										startIcon={<ShoppingCartIcon />}
 									>
 										Cart
 									</Button>
