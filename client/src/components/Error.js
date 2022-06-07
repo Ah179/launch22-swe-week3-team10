@@ -16,7 +16,7 @@ const Error = props => {
 		<>
 		 	<ThemeProvider theme={theme}>
 				<Typography variant="h4" sx={{ mt: 1 }}>You shouldn't walk and read.</Typography>
-				<Typography variant="subtitle1">Error 404 - This page doesn't exist!</Typography>
+				<Typography variant="subtitle1">Error 404 - That page doesn't exist!</Typography>
 				<Button
 					variant="contained"
 					color="navbutton"
