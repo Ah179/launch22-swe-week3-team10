@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Books from './components/Books';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
+        <Route path="" element={<Books />} />
         <Route path="product/:productID" element={null} />
         <Route path="cart" element={null} />
+        <Route path="*" element={null} />
       </Route>
     </Routes>
   </BrowserRouter>
