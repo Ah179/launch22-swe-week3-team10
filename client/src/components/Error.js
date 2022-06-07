@@ -12,17 +12,19 @@ const theme = createTheme({
 })
 
 const Error = props => {
+	document.title = 'Error 404 - Bookly';
+	
 	return (
 		<>
 		 	<ThemeProvider theme={theme}>
-				<Typography variant="h4" sx={{ mt: 1 }}>You shouldn't walk and read.</Typography>
-				<Typography variant="subtitle1">Error 404 - That page doesn't exist!</Typography>
+			 	<Typography variant="h5" sx={{ mt: 1 }}>Error 404</Typography>
+				<Typography variant="h4">That page doesn't exist!</Typography>
+				<Typography variant="subtitle1" sx={{ m: 2 }}>Perhaps try not to walk and read?</Typography>
 				<Button
 					variant="contained"
 					color="navbutton"
 					component={Link}
 					to='/'
-					sx={{ m: 1 }}
 				>
 					Go to Books	
 				</Button>
