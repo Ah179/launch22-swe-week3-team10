@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const { query } = require('express');
 
 let books;
 
@@ -9,8 +8,8 @@ router.get('/', async (req, res, next) => {
 	try {
 		const subject = 'Fiction';
 		let works = [];
-		await axios.get(`https://openlibrary.org/search.json`, { params: { subject: subject, limit: 100 }})
-			.then((response) => response.data.docs.slice(0, 100).filter((doc) => doc.cover_i).forEach((doc) => {
+		await axios.get(`https://openlibrary.org/search.json`, { params: { subject: subject, limit: 15 }})
+			.then((response) => response.data.docs.filter((doc) => doc.cover_i).forEach((doc) => {
 				works.push({
 					key: doc.key,
 					title: doc.title,
