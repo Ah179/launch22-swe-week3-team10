@@ -1,20 +1,20 @@
 import { teal } from '@mui/material/colors';
-import { Card, CardContent, CardMedia, Typography, Button} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Button, CardActionArea} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
+import { Link } from 'react-router-dom';
 
 const ProductCard = (props) => {
     
 
 
     return(
-        <div style={{padding: '50px'}}>
+        <div style={{padding: '30px'}}>
             <Card variant='elevation' 
-            onClick={props.onClick}
             style={{
                 display: 'inline-block',
-                width: '350px',
-                height: '700px',
+                width: '250px',
+                height: '500px',
                 margin: 'auto',
                 backgroundColor: teal[100],
                 float: 'left',
@@ -27,27 +27,29 @@ const ProductCard = (props) => {
                   },
                    cursor:  'pointer'
             }}>
+                <CardActionArea component={Link} to="/bookpage" state={{book: props.book}} style={{ backgroundColor: teal[100] }}>
             <CardMedia
                 component='img'
                 image={props.book.image_url}
                 />               
-                <CardContent>
+
                     
-                    <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '1', WebkitBoxOrient: 'vertical', }}
-display='inline' variant='h4'style={{fontWeight: 'bold', }}>
+                    <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '1', WebkitBoxOrient: 'vertical', paddingTop: '10px' }}
+display='inline' variant='h6'style={{fontWeight: 'bold', }}>
                         {props.book.title}                       
                     </Typography>
 
                     <Typography sx={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: '1', WebkitBoxOrient: 'vertical', }}
-display='inline' variant='h4'>
+display='inline' variant='h6'>
                         {props.book.authors[0].name}                       
                     </Typography>
-                    
-                    <div style={{float: 'inline-start', marginTop: '15px'}}>
-                        <IconButton size='large' style={{float: 'left', }}><ShoppingCartIcon style={{transform: 'scale(2,2)'}} /></IconButton>
-                        <Typography  sx={{display:'inline', float: 'right', fontSize: '1.99rem'}}>{props.book.price}</Typography>
+                    </CardActionArea>
+                    <div style={{float: 'inline-start',}}>
+                        <IconButton size='large' style={{float: 'left', paddingLeft: '15px', }}><ShoppingCartIcon style={{transform: 'scale(1.2,1.2)', paddingBottom: '80px'}} /></IconButton>
+                        <Typography  sx={{display:'inline', float: 'right', fontSize: '1.4rem', paddingRight: '10px'}}>{props.book.price}</Typography>
                     </div>
-                </CardContent>
+
+                
             </Card>
         </div>
     )
