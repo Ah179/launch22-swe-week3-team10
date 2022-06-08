@@ -30,7 +30,7 @@ const Navbar = props => {
 							<Grid item xs={10}>
 								<nav>
 									<Button
-										variant={useLocation().pathname === '/' ? 'contained' : 'text'}
+										variant={useLocation().pathname === '/book/:isbn' ? 'contained' : 'text'}
 										component={Link}
 										to='/book/:isbn'
 										sx={{ mx: 1 }}
