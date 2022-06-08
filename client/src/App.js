@@ -4,7 +4,6 @@ import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar.js';
 import {useState, useEffect} from 'react'
 import axios from "axios";
-import { ThemeContext } from '@emotion/react';
 
 export const productDataContext = React.createContext()
 
