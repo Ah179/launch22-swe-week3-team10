@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
+let books;
+
 router.get('/', async (req, res, next) => {
 	try {
 		const subject = 'Fiction';
@@ -54,6 +56,7 @@ router.get('/', async (req, res, next) => {
 				...work,
 				...bookInfo[id],
 			}});
+		books = {works: works};
 		res.status(200).send({works: works});
 	} catch (error) {
 		console.log(error);
