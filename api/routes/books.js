@@ -4,34 +4,49 @@ const axios = require('axios');
 
 router.get('/', async (req, res, next) => {
 	try {
-		const subject = 'fiction';
+		const subject = 'Fiction';
 		let works = [];
-		await axios.get(`https://openlibrary.org/subjects/${subject}.json`)
-			.then((response) => {
-				// parse the necessary data for each work
-				response.data.works.filter((work) => work.availability.isbn)
-					.forEach((work) => {
-						works.push({ 
-							key: work.key,
-							title: work.title,
-							isbn: work.availability.isbn,
-							authors: work.authors,
-							cover: `https://covers.openlibrary.org/b/isbn/${work.availability.isbn}-L.jpg`,
-						});
-					});
-			});
-		console.log(works);
+		await axios.get(`https://openlibrary.org/search.json`, { params: { subject: subject, limit: 100 }})
+			.then((response) => response.data.docs.slice(0, 100).filter((doc) => doc.cover_i).forEach((doc) => {
+				works.push({
+					key: doc.key,
+					title: doc.title,
+					authors: doc.author_name,
+					isbn: doc.isbn[doc.isbn.length - 1],
+					cover: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`
+				});
+			}));
 
-		// get the description of each work
+		// get the description and number of pages of each work
 		// https://stackoverflow.com/questions/37576685/using-async-await-with-a-foreach-loop
 		const bookInfo = [];
 		for (const work of works) {
-			await axios.get(`https://openlibrary.org/${work.key}`)
+			let desc;
+			await axios.get(`https://openlibrary.org${work.key}.json`)
+				.then((response) => desc = response.data.description)
+			
+			await axios.get(`https://openlibrary.org/api/books`, {
+				params: {
+					bibkeys: `ISBN:${work.isbn}`,
+					jscmd: 'data',
+					format: 'json'
+				}
+			})
 				.then((response) => {
-					bookInfo.push({
-						description: response.data.description,
-						numberOfPages: response.data.number_of_pages,
-					})
+					if (typeof response === 'undefined' || Object.keys(response.data).length === 0)
+						bookInfo.push({
+							number_of_pages: null,
+							price: 10,
+							desc: desc
+						})
+					else {
+						const number_of_pages = response.data[`ISBN:${work.isbn}`].number_of_pages;
+						bookInfo.push({
+							number_of_pages: number_of_pages ? number_of_pages : null,
+							price: number_of_pages ? Number((number_of_pages * 0.9).toFixed(2)) : 10,
+							desc: desc
+						});
+					}
 				});
 		}
 		works = works.map((work, id) => {
@@ -42,7 +57,7 @@ router.get('/', async (req, res, next) => {
 		res.status(200).send({works: works});
 	} catch (error) {
 		console.log(error);
-		res.status(500).send({'message': error});
+		res.status(500).send({'message': error.toString()});
 	}
 })
 
