@@ -24,7 +24,8 @@ function ProductsPage() {
                 image_url: 'https://ia600603.us.archive.org/view_archive.php?archive=/27/items/olcovers649/olcovers649-L.zip&file=6498519-L.jpg',
                 has_fulltext: true,
                 ia: "mansfieldparknov03aust",
-                price: '$25.00'
+                price: '$25.00',
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat."
             },
         ]
     })
@@ -33,7 +34,6 @@ function ProductsPage() {
         <div>
             {productData.works.map( (book) => (
                 <Product
-                onClick={console.log("hello")}
                 book={book}/>
             ))}
         </div>
