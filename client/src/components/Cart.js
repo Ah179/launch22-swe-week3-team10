@@ -1,31 +1,55 @@
 import React from 'react';
 import "./Cart.css";
-function Cart() {
+import { useState, useEffect } from 'react';
+
+    const Cart = ({ cart, setCart, handleChange }) => {
+    const [price, setPrice] = useState(0);
+  
+    // const handleRemove = () => {
+    //   const arr = cart.filter((item) => item.id !== id);
+    //   setCart(arr);
+    //   handlePrice();
+    // };
+  
+    const handlePrice = () => {
+      let ans = 0;
+      cart.map((item) => (ans += item.amount * item.price));
+      setPrice(ans);
+    };
+  
+    useEffect(() => {
+      handlePrice();
+    }, []); 
+  
+    console.log(cart);
+
     return (
         <article>
-        <div className="cart_box" >
+        {cart.map((item) => (
+        <div className="cart_box" key={item.id}>
           <div className="cart_img">
-            <img src="https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/3e213839-db48-4510-91c0-2e05eca3c6bd/air-force-1-07-lv8-mens-shoes-1BSQGs.png" alt="" />
-            <p>Nike Air Force 1</p>
+            <img src={item.img} alt="" />
+            <p>{item.title}</p>
           </div>
           <div>
-            <button >+</button>
-            <button>3</button>
-            <button >-</button>
+            <button onClick={() => handleChange(item, 1)}>+</button>
+            <button>{item.amount}</button>
+            <button onClick={() => handleChange(item, -1)}>-</button>
           </div>
           <div>
-            <span>$100</span>
-            <button>Remove</button>
+            <span>{item.price}</span>
+            {/* <button onClick={() => handleRemove(item.id)}>Remove</button> */}
           </div>
         </div>
-        <div className="total">
+      ))}
+      <div className="total">
         <span>Total Price of your Cart</span>
-        <span>$ - $300</span>
+        <span>$ - {price}</span>
       </div>
         </article>
         
     );
-}
 
+};
 
 export default Cart;
