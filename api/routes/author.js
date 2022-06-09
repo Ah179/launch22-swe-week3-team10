@@ -5,9 +5,10 @@ const axios = require('axios');
 //gets books by author 
 router.get('/', async(req, res, next) => {
     try{
+    console.log(req.body);
     let works = [];
     const author = req.body.author;
-    await axios.get(`https://openlibrary.org/search.json`, { params: { subject: 'Jane', limit: 15 }})
+    await axios.get(`https://openlibrary.org/search.json`, { params: { subject: author, limit: 15 }})
     .then((response) => response.data.docs.slice(0, 100).filter((doc) => doc.cover_i).forEach((doc) => {
         works.push({
             key: doc.key,
