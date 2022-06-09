@@ -14,7 +14,6 @@ function App() {
 
   const addToCart = (data) => {
     setCartData([...cartData, data])
-    console.log(cartData)
   }
   
   useEffect(()=>{async function getBook()

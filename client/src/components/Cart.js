@@ -14,7 +14,6 @@ function Cart() {
             <p>Nike Air Force 1</p>
           </div>
           <div>
-            {console.log(cartData)}
             <button >+</button>
             <button>3</button>
             <button >-</button>
