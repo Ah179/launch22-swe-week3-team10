@@ -8,7 +8,7 @@ import { teal } from '@mui/material/colors';
 function BookPage(props) {
     const location = useLocation();
     const productData = location.state?.book;
-
+    document.title = productData.title
     return(<>
     <div style={{justifyContent: 'center', display: 'flex'}}>
         <div style={{paddingTop: '50px', marginRight: '100px', }}>
@@ -25,7 +25,7 @@ function BookPage(props) {
         <div style={{paddingTop: '50px', marginLeft: '75px', display: 'flex', flexDirection: 'column', float: 'left', justifyContent: 'left', textAlign: 'left' }}>
             <Typography variant='h2' style={{fontWeight: 'bold', letterSpacing: '3px', float: 'left'}}>{productData.title}</Typography>
 
-            <Typography variant='h3' style={{ letterSpacing: '3px', float: 'left',}}>{productData.price}</Typography>
+            <Typography variant='h3' style={{ letterSpacing: '3px', float: 'left',}}>${productData.price}</Typography>
             <Typography variant='h5' style={{float: 'left', width: '800px', textAlign: 'left', paddingTop: '50px', height: '285px',  overflow: 'hidden', textOverflow: 'ellipsis',}}>{productData.desc}</Typography>
             <Button variant='contained' sx={{borderRadius: 16, backgroundColor: teal[100], color: 'black', '&:hover': {
     backgroundColor: teal[70],

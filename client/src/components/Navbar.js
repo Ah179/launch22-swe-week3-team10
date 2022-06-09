@@ -30,9 +30,9 @@ const Navbar = props => {
 							<Grid item xs={10}>
 								<nav>
 									<Button
-										variant={useLocation().pathname === '/book/:isbn' ? 'contained' : 'text'}
+										variant={useLocation().pathname === '/' ? 'contained' : 'text'}
 										component={Link}
-										to='/book/:isbn'
+										to=''
 										sx={{ mx: 1 }}
 										startIcon={<BookIcon />}
 										color="navbutton"

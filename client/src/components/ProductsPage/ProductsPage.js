@@ -8,7 +8,7 @@ import { productDataContext } from '../../App';
 function ProductsPage() {
     const productData = useContext(productDataContext)
     console.log(useContext(productDataContext))
-
+    document.title = 'Bookly'
     return(
         <div>
             {productData ? productData.map( (book) => (

@@ -20,8 +20,8 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="" element={null} />
-        <Route path="book/:isbn" element={<ProductsPage/>} />
+        <Route path="" element={<ProductsPage/>} />
+        <Route path="book/:isbn" element={null} />
         <Route path="cart" element={<Cart/>} />
         <Route path="*" element={<Error />} />
         <Route path="/bookpage" element={<BookPage/>}/>
