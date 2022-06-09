@@ -2,14 +2,20 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
+let authorName = '';
 //gets books by author 
-router.get('/', async(req, res, next) => {
-    try{
+router.post('/', async(req, res, next) => {
+    authorName = req.body.author.splice(-1).join(' ');
     console.log(req.body);
-    let works = [];
-    const author = req.body.author;
-    await axios.get(`https://openlibrary.org/search.json`, { params: { subject: author, limit: 15 }})
-    .then((response) => response.data.docs.slice(0, 100).filter((doc) => doc.cover_i).forEach((doc) => {
+    console.log("Author"+" "+authorName);
+})
+
+router.get('/',async (req,res,next) => {
+    try{
+        console.log("Get author Work: "+authorName);
+        let works = [];
+        await axios.get(`https://openlibrary.org/search.json`, { params: { subject: authorName, limit: 15 }})
+        .then((response) => response.data.docs.slice(0, 100).filter((doc) => doc.cover_i).forEach((doc) => {
         works.push({
             key: doc.key,
             title: doc.title,

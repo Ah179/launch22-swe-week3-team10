@@ -7,12 +7,29 @@ import { teal } from '@mui/material/colors';
 import { useContext } from 'react';
 import {cartContext} from '../../App';
 
+import axios from "axios";
+import Product from './ProductCard'
+ 
 function BookPage(props) {
     const location = useLocation();
     const productData = location.state?.book;
     document.title =productData.title
 
     const {cartData, addToCart} = useContext(cartContext)
+    document.title = productData.title
+    
+    useEffect(()=>{
+    async function getAuthorsBook()
+    { 
+    
+    axios.post('http://localhost:9000/author', { author: productData.authors});
+    const response = axios.get('http://localhost:9000/author');
+    const body = await response; 
+    setAuthorBooks(body.data.works);
+    console.log('body', body);
+    }
+      getAuthorsBook();
+    }, [])
     return(<>
     <div style={{justifyContent: 'center', display: 'flex'}}>
         <div style={{paddingTop: '50px', marginRight: '100px', }}>
@@ -36,6 +53,12 @@ function BookPage(props) {
     boxShadow: 'none',
   },}}> Add To Cart</Button>
         </div>
+        </div>
+        <div>
+          {authorBooks ? authorBooks.map( (book) => (
+                <Product
+                book={book}/>
+            )): null}
         </div>
         </>)
 
