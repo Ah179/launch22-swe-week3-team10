@@ -10,7 +10,7 @@ export const productDataContext = React.createContext()
 function App() {
   const[productData, setProductData] = useState()
   useEffect(()=>{async function getBook()
-    { const response= axios.get('http://localhost:9000/books');
+    { const response= axios.get('/books');
     const body = await response; 
     setProductData(body.data.works);
     console.log('body', body);
