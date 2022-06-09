@@ -1,13 +1,14 @@
 import { teal } from '@mui/material/colors';
-import { Card, CardContent, CardMedia, Typography, Button, CardActionArea} from "@mui/material";
+import { Card, CardContent, CardMedia, Typography, Button, CardActionArea, Snackbar, Alert} from "@mui/material";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import {cartContext} from '../../App';
 
 const ProductCard = (props) => {
     const {cartData, addToCart} = useContext(cartContext)
+    const [open, setOpen] = useState(false);
 
 
     return(
@@ -50,12 +51,20 @@ display='inline' variant='h6'>
                     </Typography>
                     </CardActionArea>
                     <div style={{float: 'inline-start', marginTop: '10px'}}>
-                        <IconButton onClick={() => addToCart(props.book)}  size='large' style={{float: 'left', paddingLeft: '15px', }}><ShoppingCartIcon style={{transform: 'scale(1.2,1.2)', paddingBottom: '80px'}} /></IconButton>
+                        <IconButton onClick={() => {
+                            addToCart(props.book)
+                            setOpen(true)
+                            }}  size='large' style={{float: 'left', paddingLeft: '15px', }}><ShoppingCartIcon style={{transform: 'scale(1.2,1.2)', paddingBottom: '80px'}} /></IconButton>
                         <Typography  sx={{display:'inline', float: 'right', fontSize: '1.4rem', paddingRight: '10px'}}>${props.book.price}</Typography>
                     </div>
 
                 
             </Card>
+            <Snackbar open={open} autoHideDuration={4000} onClose={()=>setOpen(false)} >
+                <Alert severity='success' sx={{width: '500px', fontSize: 'large'}}>
+                    Added {props.book.title} to Cart!
+                </Alert>
+            </Snackbar>
         </div>
     )
 }
