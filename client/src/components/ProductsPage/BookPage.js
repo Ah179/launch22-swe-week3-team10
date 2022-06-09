@@ -4,11 +4,15 @@ import { Card, CardContent, CardMedia, Typography, Button, Box} from "@mui/mater
 import {useLocation} from 'react-router-dom'
 import { flexbox } from '@mui/system';
 import { teal } from '@mui/material/colors';
+import { useContext } from 'react';
+import {cartContext} from '../../App';
 
 function BookPage(props) {
     const location = useLocation();
     const productData = location.state?.book;
-    document.title = productData.title
+    document.title =productData.title
+
+    const {cartData, addToCart} = useContext(cartContext)
     return(<>
     <div style={{justifyContent: 'center', display: 'flex'}}>
         <div style={{paddingTop: '50px', marginRight: '100px', }}>
@@ -27,7 +31,7 @@ function BookPage(props) {
 
             <Typography variant='h3' style={{ letterSpacing: '3px', float: 'left',}}>${productData.price}</Typography>
             <Typography variant='h5' style={{float: 'left', width: '800px', textAlign: 'left', paddingTop: '50px', height: '285px',  overflow: 'hidden', textOverflow: 'ellipsis',}}>{productData.desc}</Typography>
-            <Button variant='contained' sx={{borderRadius: 16, backgroundColor: teal[100], color: 'black', '&:hover': {
+            <Button onClick={()=> addToCart(productData)} variant='contained' sx={{borderRadius: 16, backgroundColor: teal[100], color: 'black', '&:hover': {
     backgroundColor: teal[70],
     boxShadow: 'none',
   },}}> Add To Cart</Button>
