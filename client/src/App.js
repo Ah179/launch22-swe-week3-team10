@@ -15,6 +15,14 @@ function App() {
   const addToCart = (data) => {
     setCartData([...cartData, data])
   }
+
+  const removeFromCart = (data) => {
+    let i = cartData.indexOf(data)
+    const newCart = cartData;
+    newCart.splice(i, 1)
+    setCartData(newCart)
+    console.log(newCart)
+  }
   
   useEffect(()=>{async function getBook()
     { const response= axios.get('http://localhost:9000/books');
@@ -28,7 +36,7 @@ function App() {
   
   return (
     <productDataContext.Provider value={productData}>
-      <cartContext.Provider value={{cartData, addToCart}}>
+      <cartContext.Provider value={{cartData, addToCart, removeFromCart}}>
     <div className="App">
       <Navbar />
       <Outlet />

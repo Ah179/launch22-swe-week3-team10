@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import {cartContext} from '../App';
 
 function Cart() {
-  const {cartData, addToCart} = useContext(cartContext)
+  const {cartData, addToCart, removeFromCart} = useContext(cartContext)
     return (
       
         <article>
@@ -14,9 +14,10 @@ function Cart() {
             <p>Nike Air Force 1</p>
           </div>
           <div>
+            {console.log(cartData)}
             <button >+</button>
             <button>3</button>
-            <button >-</button>
+            <button onClick={()=> removeFromCart(cartData[2]) }>-</button>
           </div>
           <div>
             <span>$100</span>
