@@ -7,20 +7,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Error from './components/Error.js';
 import ProductsPage from './components/ProductsPage/ProductsPage'
 import BookPage from './components/ProductsPage/BookPage'
+import Cart from './components/Cart'
 
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
-        <Route path="" element={null} />
-        <Route path="book/:isbn" element={<ProductsPage/>} />
-        <Route path="cart" element={null} />
+        <Route path="" element={<ProductsPage/>} />
+        <Route path="book/:isbn" element={null} />
+        <Route path="cart" element={<Cart/>} />
         <Route path="*" element={<Error />} />
         <Route path="/bookpage" element={<BookPage/>}/>
       </Route>
