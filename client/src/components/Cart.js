@@ -2,9 +2,11 @@ import React from 'react';
 import "./Cart.css";
 import { useContext } from 'react';
 import {cartContext} from '../App';
+import { Button, Typography } from '@mui/material';
 
-function Cart() {
+function Cart({ cart, setCart, handleChange }) {
   const {cartData, addToCart} = useContext(cartContext)
+  
     return (
       
         <article>
@@ -14,13 +16,13 @@ function Cart() {
             <p>Nike Air Force 1</p>
           </div>
           <div>
-            <button >+</button>
-            <button>3</button>
-            <button >-</button>
+            <Button variant="outlined">-</Button>
+            <Button variant="contained">3</Button>
+            <Button variant="outlined">+</Button>
           </div>
           <div>
-            <span>$100</span>
-            <button>Remove</button>
+           <Button margin="2px" variant="text" color="success">$100</Button>
+            <Button variant="outlined" color="error">Remove</Button>
           </div>
         </div>
         <div className="total">
