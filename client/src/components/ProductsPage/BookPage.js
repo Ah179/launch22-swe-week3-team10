@@ -5,7 +5,8 @@ import {useLocation} from 'react-router-dom'
 import { flexbox } from '@mui/system';
 import { teal } from '@mui/material/colors';
 import axios from "axios";
-
+import Product from './ProductCard'
+ 
 function BookPage(props) {
     const [authorBooks, setAuthorBooks] = useState();
     const location = useLocation();
@@ -16,13 +17,14 @@ function BookPage(props) {
     async function getAuthorsBook()
     { 
     
-    const response= axios.get('http://localhost:9000/author', productData.authors);
+    axios.post('http://localhost:9000/author', { author: productData.authors});
+    const response = axios.get('http://localhost:9000/author');
     const body = await response; 
     setAuthorBooks(body.data.works);
     console.log('body', body);
     }
       getAuthorsBook();
-    })
+    }, [])
     return(<>
     <div style={{justifyContent: 'center', display: 'flex'}}>
         <div style={{paddingTop: '50px', marginRight: '100px', }}>
@@ -46,6 +48,12 @@ function BookPage(props) {
     boxShadow: 'none',
   },}}> Add To Cart</Button>
         </div>
+        </div>
+        <div>
+          {authorBooks ? authorBooks.map( (book) => (
+                <Product
+                book={book}/>
+            )): null}
         </div>
         </>)
 
