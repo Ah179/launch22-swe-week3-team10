@@ -1,7 +1,12 @@
 import React from 'react';
 import "./Cart.css";
+import { useContext } from 'react';
+import {cartContext} from '../App';
+
 function Cart() {
+  const {cartData, addToCart} = useContext(cartContext)
     return (
+      
         <article>
         <div className="cart_box" >
           <div className="cart_img">
@@ -9,6 +14,7 @@ function Cart() {
             <p>Nike Air Force 1</p>
           </div>
           <div>
+            {console.log(cartData)}
             <button >+</button>
             <button>3</button>
             <button >-</button>

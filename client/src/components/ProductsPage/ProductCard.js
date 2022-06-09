@@ -3,13 +3,15 @@ import { Card, CardContent, CardMedia, Typography, Button, CardActionArea} from 
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import IconButton from '@mui/material/IconButton';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import {cartContext} from '../../App';
 
 const ProductCard = (props) => {
-    
+    const {cartData, addToCart} = useContext(cartContext)
 
 
     return(
-        <div style={{padding: '30px'}}>
+        <div>
             <Card variant='elevation' 
             style={{
                 display: 'inline-block',
@@ -48,7 +50,7 @@ display='inline' variant='h6'>
                     </Typography>
                     </CardActionArea>
                     <div style={{float: 'inline-start', marginTop: '10px'}}>
-                        <IconButton size='large' style={{float: 'left', paddingLeft: '15px', }}><ShoppingCartIcon style={{transform: 'scale(1.2,1.2)', paddingBottom: '80px'}} /></IconButton>
+                        <IconButton onClick={() => addToCart(props.book)}  size='large' style={{float: 'left', paddingLeft: '15px', }}><ShoppingCartIcon style={{transform: 'scale(1.2,1.2)', paddingBottom: '80px'}} /></IconButton>
                         <Typography  sx={{display:'inline', float: 'right', fontSize: '1.4rem', paddingRight: '10px'}}>${props.book.price}</Typography>
                     </div>
 
