@@ -1,4 +1,7 @@
 {
+	"engines": {
+		"node": "16.x"
+	},
 	"scripts": {
 		"start": "node api/bin/www",
 		"heroku-postbuild": "cd api && npm install && cd ../client && npm install && npm run build"
