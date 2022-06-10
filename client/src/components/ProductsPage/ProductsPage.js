@@ -13,6 +13,8 @@ function ProductsPage(props) {
 
     return(
         <div>
+            <br></br>
+            <Typography variant='h2'>Best Selling Books</Typography>
             {productData ? productData.map( (book) => (
                 <Product
                 addToCart={addToCart}
@@ -24,3 +26,4 @@ function ProductsPage(props) {
 };
 
 export default ProductsPage;
+
