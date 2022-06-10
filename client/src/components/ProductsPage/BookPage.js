@@ -49,11 +49,16 @@ function BookPage(props) {
   },}}> Add To Cart</Button>
         </div>
         </div>
+        <div style={{display: 'flex',flexDirection:'column'}}>
         <div>
-          {authorBooks ? authorBooks.map( (book) => (
+        <Typography variant='h3' style={{fontWeight: 'bold', letterSpacing: '3px', float: 'left'}}>More by {productData.authors[0]}</Typography>
+        </div>
+        <div>
+          {authorBooks ? authorBooks.filter((book)=>book.authors[0] === productData.authors[0]).map( (book) => (
                 <Product
                 book={book}/>
             )): null}
+        </div>
         </div>
         </>)
 
