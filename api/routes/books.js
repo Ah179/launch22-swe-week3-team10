@@ -2,12 +2,14 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 
+let books;
+
 router.get('/', async (req, res, next) => {
 	try {
 		const subject = 'Fiction';
 		let works = [];
-		await axios.get(`https://openlibrary.org/search.json`, { params: { subject: subject, limit: 100 }})
-			.then((response) => response.data.docs.slice(0, 100).filter((doc) => doc.cover_i).forEach((doc) => {
+		await axios.get(`https://openlibrary.org/search.json`, { params: { subject: subject, limit: 15 }})
+			.then((response) => response.data.docs.filter((doc) => doc.cover_i).forEach((doc) => {
 				works.push({
 					key: doc.key,
 					title: doc.title,
@@ -43,7 +45,8 @@ router.get('/', async (req, res, next) => {
 						const number_of_pages = response.data[`ISBN:${work.isbn}`].number_of_pages;
 						bookInfo.push({
 							number_of_pages: number_of_pages ? number_of_pages : null,
-							price: number_of_pages ? Number((number_of_pages * 0.9).toFixed(2)) : 10,
+							// determine the book price depending on number of pages
+							price: number_of_pages ? Number((number_of_pages * 0.09).toFixed(2)) : 10,
 							desc: desc
 						});
 					}
@@ -54,7 +57,19 @@ router.get('/', async (req, res, next) => {
 				...work,
 				...bookInfo[id],
 			}});
+		books = {works: works};
 		res.status(200).send({works: works});
+	} catch (error) {
+		console.log(error);
+		res.status(500).send({'message': error.toString()});
+	}
+})
+
+// returns more information about a book by searching via isbn
+router.get('/book', (req, res, next) => {
+	try {
+		const book = books.works.filter((work) => req.query.ISBN === work.isbn);
+		res.status(200).send({work: book});
 	} catch (error) {
 		console.log(error);
 		res.status(500).send({'message': error.toString()});
