@@ -5,14 +5,23 @@ import Navbar from './components/Navbar.js';
 import {useState, useEffect} from 'react'
 import axios from "axios";
 
+
 export const productDataContext = React.createContext()
 export const cartContext = React.createContext()
 
 function App() {
+
+  
+  const[productData, setProductData] = useState([])
+  const[cartData, setCartData] = useState([])
+
+  const [counter, setCounter] = useState(1);
+
   const[productData, setProductData] = useState([])
   const[cartData, setCartData] = useState([])
 
   const [counter, setCounter] = useState(0);
+
  
   //increase counter
   const increase = () => {
@@ -25,9 +34,24 @@ function App() {
   };
 
   const addToCart = (data) => {
+
+    setCartData([...cartData, {...data, quantity: 1}])
+  }
+  
+
+  const handleChange = (book, d) => {
+    const ind = cartData.indexOf(book);
+    const arr = cartData;
+    arr[ind].quantity += d;
+
+    if (arr[ind].quantity === 0) arr[ind].quantity = 1;
+    setCartData([...arr]);
+  };
+
     setCartData([...cartData, data])
   }
   
+
 
   const removeFromCart = (data) => {
     let i = cartData.indexOf(data)
@@ -40,6 +64,14 @@ function App() {
   //   const ind = cartData.indexOf(data);
   //   const arr = cartData;
   //   arr[ind].amount += d;
+
+
+    if (arr[ind].amount === 0) arr[ind].amount = 1;
+    setCart([...arr]);
+  };
+  return (
+    <productDataContext.Provider value={productData}>
+      <cartContext.Provider value={{cartData, setCartData, addToCart, removeFromCart, setCounter, counter, increase, decrease, handleChange}}>
 
   //   if (arr[ind].amount === 0) arr[ind].amount = 1;
   //   setCartData([...arr]);
@@ -58,9 +90,14 @@ function App() {
   return (
     <productDataContext.Provider value={productData}>
       <cartContext.Provider value={{cartData, setCartData, addToCart, removeFromCart, setCounter, counter, increase, decrease}}>
+
     <div className="App">
       <Navbar />
       <Outlet />
+
+      <Cart cart={cart} setCart={setCart} handleChange={handleChange} />
+
+
     </div>
     </cartContext.Provider>
     </productDataContext.Provider>
