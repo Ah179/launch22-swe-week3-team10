@@ -4,6 +4,7 @@ import { Outlet } from 'react-router-dom';
 import Navbar from './components/Navbar.js';
 import {useState, useEffect} from 'react'
 import axios from "axios";
+import Cart from "./components/Cart"
 
 
 export const productDataContext = React.createContext()
@@ -12,15 +13,14 @@ export const cartContext = React.createContext()
 function App() {
 
   
-  const[productData, setProductData] = useState([])
-  const[cartData, setCartData] = useState([])
+
 
   const [counter, setCounter] = useState(1);
 
   const[productData, setProductData] = useState([])
   const[cartData, setCartData] = useState([])
 
-  const [counter, setCounter] = useState(0);
+
 
  
   //increase counter
@@ -48,8 +48,7 @@ function App() {
     setCartData([...arr]);
   };
 
-    setCartData([...cartData, data])
-  }
+
   
 
 
@@ -60,24 +59,13 @@ function App() {
     setCartData(newCart)
     console.log(newCart)
   }
-  // const handleChange = (data, d) => {
-  //   const ind = cartData.indexOf(data);
-  //   const arr = cartData;
-  //   arr[ind].amount += d;
-
-
-    if (arr[ind].amount === 0) arr[ind].amount = 1;
-    setCart([...arr]);
-  };
-  return (
-    <productDataContext.Provider value={productData}>
-      <cartContext.Provider value={{cartData, setCartData, addToCart, removeFromCart, setCounter, counter, increase, decrease, handleChange}}>
-
-  //   if (arr[ind].amount === 0) arr[ind].amount = 1;
-  //   setCartData([...arr]);
-  // };
   
-  useEffect(()=>{async function getBook()
+
+
+
+
+  
+  useEffect(() =>{async function getBook()
     { const response= axios.get('/books');
     const body = await response; 
     setProductData(body.data.works);
@@ -95,7 +83,7 @@ function App() {
       <Navbar />
       <Outlet />
 
-      <Cart cart={cart} setCart={setCart} handleChange={handleChange} />
+      {/* <Cart cart={cartData} setCart={setCartData} handleChange={handleChange} /> */}
 
 
     </div>
