@@ -14,7 +14,7 @@ function BookPage(props) {
     const location = useLocation();
     const productData = location.state?.book;
     document.title =productData.title
-
+    const [authorBooks, setAuthorBooks] = useState();
     const {cartData, addToCart} = useContext(cartContext)
     document.title = productData.title
     
@@ -54,7 +54,7 @@ function BookPage(props) {
   },}}> Add To Cart</Button>
         </div>
         </div>
-        <div>
+        <div style={{justifyContent: 'center'}}>
           {authorBooks ? authorBooks.map( (book) => (
                 <Product
                 book={book}/>
