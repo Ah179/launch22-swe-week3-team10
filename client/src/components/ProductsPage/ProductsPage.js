@@ -4,6 +4,8 @@ import { Card, CardContent, CardMedia, Typography, Button} from "@mui/material";
 import Product from './ProductCard'
 import { productDataContext } from '../../App';
 import {cartContext} from '../../App';
+import "../spinner.css";
+import LoadingSpinner from "../LoadingSpinner";
 
 
 function ProductsPage(props) {
@@ -19,7 +21,7 @@ function ProductsPage(props) {
                 <Product
                 addToCart={addToCart}
                 book={book}/>
-            )): null}
+            )): <LoadingSpinner/>}
         </div>
     )
 

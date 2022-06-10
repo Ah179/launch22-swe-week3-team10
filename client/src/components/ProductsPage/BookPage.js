@@ -6,9 +6,11 @@ import { flexbox } from '@mui/system';
 import { teal } from '@mui/material/colors';
 import { useContext } from 'react';
 import {cartContext} from '../../App';
-
+import "../spinner.css";
 import axios from "axios";
 import Product from './ProductCard'
+import LoadingSpinner from "../LoadingSpinner";
+
  
 function BookPage(props) {
     const [open, setOpen] = useState(false);
@@ -68,7 +70,7 @@ function BookPage(props) {
           {authorBooks ? authorBooks.filter((book)=>book.authors[0] === productData.authors[0]).map( (book) => (
                 <Product
                 book={book}/>
-            )): null}
+            )): <LoadingSpinner/>}
         </div>
         </div>
         </>)
